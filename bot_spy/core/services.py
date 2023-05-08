@@ -36,6 +36,16 @@ class MemoryDB:
             export_list.append(row)
         print(export_list)
         return export_list
+    
+
+    async def get_all(self) -> list[tuple]:
+        self.cursor.execute('SELECT id, client_id, url, price FROM urls;')
+        result = self.cursor.fetchall()
+        export_list = []
+        for row in result:
+            export_list.append(row)
+        print(export_list)
+        return export_list
 
     async def update_price_for_url(self, client_id: int, url: str, price: int):
         self.cursor.execute('UPDATE urls SET price = ? WHERE client_id = ? AND url = ?;', (price, client_id, url))
@@ -75,8 +85,8 @@ async def delete_url(client_id: int, index: int):
     await db.delete_url(client_id, index)
 
 
-async def get_url_for_spy_proccess(client_id: int):
-    return await db.get_url_and_price(client_id)
+async def get_url_for_spy_proccess():
+    return await db.get_all()
 
 
 async def update_price_for_url(client_id: int, url: str, new_price: int):
