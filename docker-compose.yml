@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+  wb_spy_bot:
+    image: wb_spy_bot:latest
+    container_name: hrboard_telegram_stage
+    env_file:
+      - .env
+    restart: unless-stopped
+
