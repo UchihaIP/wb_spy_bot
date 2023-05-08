@@ -2,6 +2,7 @@ import sqlite3
 
 from core.logger import logger
 
+
 class MemoryDB:
     def __init__(self, db_path: str) -> None:
         self.conn = sqlite3.connect(db_path)

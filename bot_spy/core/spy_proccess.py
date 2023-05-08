@@ -6,6 +6,7 @@ from aiogram import Bot
 from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 
 from core.logger import logger
 from core.config import settings
@@ -32,7 +33,7 @@ async def spy_proccess(bot: Bot):
 async def monitor_spy_seller_price(url_lst: list[tuple]) -> list[tuple]:
     logger.info("monitor_spy_seller_price() ~ Start ")
     price_list = []
-    service = Service(executable_path="/usr/bin/chromedriver")
+    service = Service(executable_path=ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
     options.add_argument('--no-sandbox')
